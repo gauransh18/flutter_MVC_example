@@ -1,16 +1,11 @@
-# suvaye_app
+# suvaye_app flutter intern
 
-A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+Video of working UI:
 
-A few resources to get you started if this is your first Flutter project:
+https://github.com/gauransh18/flutter_assignment/assets/66783709/785c21b9-675e-4fd8-b897-eaca1c94802f
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Screenshot of the App
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="https://github.com/gauransh18/flutter_assignment/assets/66783709/068d5150-2554-4b3a-be5b-e20cb5a149d0" alt="Screenshot" height="600">
