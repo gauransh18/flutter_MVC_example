@@ -32,6 +32,7 @@ class _MyAppState extends State<MyApp> {
             height: 50,
             fit: BoxFit.contain,
           ),
+          centerTitle: false,
           title: Text('Suvaye',
               style: TextStyle(
                   color: Colors.black,
@@ -41,7 +42,7 @@ class _MyAppState extends State<MyApp> {
             Stack(
               children: [
                 IconButton(
-                    icon: Icon(Icons.notifications, color: Colors.black),
+                    icon: Icon(Icons.notifications_none_outlined, color: Colors.black , size: 30),
                     onPressed: () {
                       //TODO : Notification onPressed Func
                     }),
