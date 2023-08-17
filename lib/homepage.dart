@@ -2,40 +2,99 @@
 
 import 'package:flutter/material.dart';
 
-class Homepage extends StatelessWidget {
-  const Homepage({super.key});
+import 'package:flutter/material.dart';
+
+class Homepage extends StatefulWidget {
+  @override
+  _HomepageState createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  int _currentIndex = 1;
+
+  final List<Widget> _pages = [
+    TodayPage(),
+    ServicePage(),
+    ChatPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: Image.asset(
-            'assets/logo.png',
-            width: 50,
-            height: 50,
-            fit: BoxFit.contain,
-          ),
-          title: Text('Suvaye',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.normal)),
-          actions: [
-            IconButton(
-              icon: Icon(
-                Icons.notifications,
-              ),
-              onPressed: () {
-                // TODO: Notification Bell onPressed Func
-              },
-            ),
-          ],
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: Image.asset(
+          'assets/logo.png',
+          width: 50,
+          height: 50,
+          fit: BoxFit.contain,
         ),
-        body: SafeArea(
-          child: SingleChildScrollView(
-              child: Padding(
+        title: Text('Suvaye',
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.normal)),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.notifications,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              // TODO: Notification Bell onPressed Func
+            },
+          ),
+        ],
+      ),
+      body:
+          // _pages[_currentIndex],
+          AnimatedSwitcher(
+        duration: Duration(milliseconds: 300),
+        child: _pages[_currentIndex],
+        transitionBuilder: (child, animation) {
+          return ScaleTransition(
+            scale: animation,
+            child: child,
+          );
+        },
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Color(0xFF6941c6),
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.today_outlined),
+            label: 'Today',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.grid_view_rounded),
+            label: 'Services',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat_bubble_outline),
+            label: 'Chat',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ServicePage extends StatelessWidget {
+  const ServicePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,10 +132,133 @@ class Homepage extends StatelessWidget {
                   height: 200,
                   child: Services(),
                 ),
+
+                SizedBox(height: 20),
+                Row(
+                  children: [
+                    Text(
+                      "Outline",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Spacer(),
+                    TextButton(
+                        onPressed: () {}, //TODO : See more onPressed Func
+                        child: Text("See more >",
+                            style: TextStyle(
+                                fontSize: 14, color: Color(0xFF027A48))))
+                  ],
+                ),
+
+                Container(
+                  height: 200,
+                  child: GridView.count(
+                    crossAxisCount: 2, // 2 columns
+                    mainAxisSpacing: 16.0,
+                    crossAxisSpacing: 16.0,
+                    childAspectRatio: 2,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Color(0xFFF9F5FF),
+                        ),
+                        child: Center(
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(Icons.smartphone_rounded,
+                                    color: Color(0xFF8b2cf5)),
+                                SizedBox(width: 10),
+                                Text(
+                                  'Apps',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ]),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Color(0xFFFDF2FA),
+                        ),
+                        child: Center(
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(Icons.web, color: Color(0xFFe1ade4)),
+                                SizedBox(width: 10),
+                                Text(
+                                  'Websites',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ]),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Color(0xFFFFFAf5),
+                        ),
+                        child: Center(
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(Icons.design_services_rounded,
+                                    color: Color(0xFFf29d39)),
+                                SizedBox(width: 10),
+                                Text(
+                                  'Designs',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ]),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Color(0xFFF0F9FF),
+                        ),
+                        child: Center(
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(Icons.person_4_outlined,
+                                    color: Color(0xFF7ba7d7)),
+                                SizedBox(width: 10),
+                                Text(
+                                  'Consultant',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ]),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
-          )),
-        ));
+          ),
+        ),
+      ),
+
+      // bottomNavigationBar: ,
+    );
   }
 }
 
@@ -105,7 +287,7 @@ class _ServicesState extends State<Services> {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Color(0xFFECFDF3),
+                  color: Color(0xFFecfdf3),
                 ),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -220,8 +402,8 @@ class _ServicesState extends State<Services> {
                   margin: EdgeInsets.all(4),
                   decoration: BoxDecoration(
                     color: _currentPage == i
-                        ? const Color.fromARGB(255, 72, 72, 72)
-                        : const Color.fromARGB(255, 194, 194, 194),
+                        ? const Color(0xff98a2b3)
+                        : const Color(0xffd9d9d9d9),
                     shape: BoxShape.circle,
                   ),
                 ),
@@ -236,5 +418,31 @@ class _ServicesState extends State<Services> {
   void dispose() {
     _pageController.dispose();
     super.dispose();
+  }
+}
+
+class TodayPage extends StatelessWidget {
+  const TodayPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text('Today'),
+      ),
+    );
+  }
+}
+
+class ChatPage extends StatelessWidget {
+  const ChatPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text('Chat Page'),
+      ),
+    );
   }
 }
